@@ -100,6 +100,7 @@ body {
     background-color: #fff;
     border: 2px solid #000;
     text-align: center;
+    position: relative;
 }
 
 .slot-window {
@@ -141,6 +142,23 @@ body {
     background-color: #f8f8f8;
     opacity: 0;
     transition: opacity 0.5s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.slot-result.firework-highlight {
+    animation: result-pulse 0.6s ease-out;
+}
+
+@keyframes result-pulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 20px rgba(255, 107, 107, 0.4);
+    }
 }
 
 .slot-result h3 {
@@ -164,6 +182,38 @@ body {
     font-weight: 400;
     letter-spacing: 2px;
     color: #000;
+}
+
+.fireworks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.firework-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: firework-explode 1.2s ease-out forwards;
+    box-shadow: 0 0 8px currentColor, 0 0 12px currentColor;
+    will-change: transform, opacity;
+}
+
+@keyframes firework-explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x), var(--y)) scale(0);
+        opacity: 0;
+    }
 }
 
 .spin-button {
